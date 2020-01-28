@@ -1,4 +1,4 @@
-package week14;
+package week15;
 
 
 
@@ -508,9 +508,9 @@ public class SphereShadowDifferentMaterials extends JFrame implements GLEventLis
         GL4 gl = (GL4) GLContext.getCurrentGL();
 
 
-        String v1shaderSource[] = util.readShaderSource("vert1_14a.shader");
-        String v2shaderSource[] = util.readShaderSource("vert2_14a.shader");
-        String f2shaderSource[] = util.readShaderSource("frag2_14a.shader");
+        String v1shaderSource[] = util.readShaderSource("vert1_15a.shader");
+        String v2shaderSource[] = util.readShaderSource("vert2_15a.shader");
+        String f2shaderSource[] = util.readShaderSource("frag2_15a.shader");
 
         int vShader1 = gl.glCreateShader(GL_VERTEX_SHADER);
         int vShader2 = gl.glCreateShader(GL_VERTEX_SHADER);

@@ -1,4 +1,4 @@
-package week14;
+package week15;
 
 
 
@@ -46,7 +46,7 @@ import static java.lang.System.out;
 
 
 
-public class SphereShadowIllustratePassOne extends JFrame implements GLEventListener
+public class SphereFloorShadow extends JFrame implements GLEventListener
 {   
     private GLCanvas myCanvas;
     // we use two programs one for each pass
@@ -98,7 +98,7 @@ public class SphereShadowIllustratePassOne extends JFrame implements GLEventList
 
     private Sphere mySphere = new Sphere(24);
 
-    public SphereShadowIllustratePassOne()
+    public SphereFloorShadow()
     {   setTitle("Directional light on sphere");
         setSize(600, 400);
         setLocation(200, 200);
@@ -286,28 +286,28 @@ public class SphereShadowIllustratePassOne extends JFrame implements GLEventList
         gl.glClearBufferfv(GL_COLOR, 0, bkgBuffer);
         
         
-//        gl.glBindFramebuffer(GL_FRAMEBUFFER, shadow_buffer[0]);
-//        gl.glFramebufferTexture(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, shadow_tex[0], 0);
-//   
-//        gl.glDrawBuffer(GL_NONE);
-//        gl.glEnable(GL_DEPTH_TEST);
-//
-//        gl.glEnable(GL_POLYGON_OFFSET_FILL);    // for reducing
-//        gl.glPolygonOffset(2.0f, 4.0f);         //  shadow artifacts
+        gl.glBindFramebuffer(GL_FRAMEBUFFER, shadow_buffer[0]);
+        gl.glFramebufferTexture(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, shadow_tex[0], 0);
+   
+        gl.glDrawBuffer(GL_NONE);
+        gl.glEnable(GL_DEPTH_TEST);
+
+        gl.glEnable(GL_POLYGON_OFFSET_FILL);    // for reducing
+        gl.glPolygonOffset(2.0f, 4.0f);         //  shadow artifacts
         
         // pass one puts in the computer memory the depth location of the objects
         // from the point of view of the light
         passOne();
         
-//        gl.glDisable(GL_POLYGON_OFFSET_FILL);   // artifact reduction, continued
-//              
-//        gl.glBindFramebuffer(GL_FRAMEBUFFER, 0);
-//        gl.glActiveTexture(GL_TEXTURE0);
-//        gl.glBindTexture(GL_TEXTURE_2D, shadow_tex[0]);
-//      
-//        gl.glDrawBuffer(GL_FRONT);
-//            
-//        passTwo();
+        gl.glDisable(GL_POLYGON_OFFSET_FILL);   // artifact reduction, continued
+              
+        gl.glBindFramebuffer(GL_FRAMEBUFFER, 0);
+        gl.glActiveTexture(GL_TEXTURE0);
+        gl.glBindTexture(GL_TEXTURE_2D, shadow_tex[0]);
+      
+        gl.glDrawBuffer(GL_FRONT);
+            
+        passTwo();
        
     }
     
@@ -324,17 +324,16 @@ public class SphereShadowIllustratePassOne extends JFrame implements GLEventList
         Vector3D lightEye = new Vector3D();
 
         Vector3D dirVector = dl.getDirection().normalize();
-        //lightEye = center.minus(dirVector.mult(500)) ;
-        lightEye = new Vector3D(10,0,0);
+        lightEye = center.minus(dirVector.mult(500)) ;
 
         // from the point of view of the light
         // this should be changed based on given light
-        Vector3D lightUp = new Vector3D(0,1,0);
+        Vector3D lightUp = new Vector3D(1,0,0);
         lightView_matrix = lookAt(lightEye, center, lightUp);
         
         
         float aspect = (float) myCanvas.getWidth() / (float) myCanvas.getHeight();
-        lightProj_matrix = perspective(60.0f, aspect, 0.1f, 1000.0f);  
+        lightProj_matrix = perspective(0.4f, aspect, 0.1f, 1000.0f);  
         
         lightMatrix.concatenate(lightProj_matrix);
         lightMatrix.concatenate(lightView_matrix);
@@ -409,7 +408,7 @@ public class SphereShadowIllustratePassOne extends JFrame implements GLEventList
     
 
     public static void main(String[] args) {
-        new SphereShadowIllustratePassOne(); 
+        new SphereFloorShadow(); 
     }
     
     
@@ -504,9 +503,9 @@ public class SphereShadowIllustratePassOne extends JFrame implements GLEventList
         GL4 gl = (GL4) GLContext.getCurrentGL();
 
 
-        String v1shaderSource[] = util.readShaderSource("vert1_14a.shader");
-        String v2shaderSource[] = util.readShaderSource("vert2_14a.shader");
-        String f2shaderSource[] = util.readShaderSource("frag2_14a.shader");
+        String v1shaderSource[] = util.readShaderSource("vert1_15a.shader");
+        String v2shaderSource[] = util.readShaderSource("vert2_15a.shader");
+        String f2shaderSource[] = util.readShaderSource("frag2_15a.shader");
 
         int vShader1 = gl.glCreateShader(GL_VERTEX_SHADER);
         int vShader2 = gl.glCreateShader(GL_VERTEX_SHADER);
