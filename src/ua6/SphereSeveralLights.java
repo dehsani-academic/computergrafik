@@ -614,9 +614,9 @@ public class SphereSeveralLights extends JFrame implements GLEventListener
         GL4 gl = (GL4) GLContext.getCurrentGL();
 
 
-        String v1shaderSource[] = util.readShaderSource("vert1_15b.shader");
-        String v2shaderSource[] = util.readShaderSource("vert2_15b.shader");
-        String f2shaderSource[] = util.readShaderSource("frag2_15b.shader");
+        String v1shaderSource[] = util.readShaderSource("vert1_16b.shader");
+        String v2shaderSource[] = util.readShaderSource("vert2_16b.shader");
+        String f2shaderSource[] = util.readShaderSource("frag2_16b.shader");
 
         int vShader1 = gl.glCreateShader(GL_VERTEX_SHADER);
         int vShader2 = gl.glCreateShader(GL_VERTEX_SHADER);
